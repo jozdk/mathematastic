@@ -1,3 +1,46 @@
+// HTML Elements
+
+// UI Elements
+
+const display = document.querySelector("#displayQuestion");
+const alerts = document.querySelector("#displayAlert");
+const form = document.querySelector("#form");
+const input = document.querySelector("#inputResult");
+const send = document.querySelector(".send");
+const span = document.querySelector("#span");
+const move = document.querySelector(".move");
+const reset = document.querySelector(".reset");
+const timeOutput = document.querySelector("#stopwatch");
+const message = document.querySelector("#message")
+const finishMessage = document.querySelector("#finish-message");
+const icons = document.querySelector("#svg-icons");
+const boxes = document.querySelectorAll(".box");
+
+// Modal Elements
+
+const openRanking = document.querySelector("#open-ranking");
+const modalRanking = document.querySelector("#bt-modal");
+const closeRanking = document.querySelector("#close-best-times");
+const olRanking = document.querySelector("#best-times");
+const ranking = document.querySelector("#bt-modal-body");
+const clear = document.querySelector("#clear-best-times");
+
+// Global Variables
+
+let hasBeenGenerated = false;
+let hasBeenSubmitted = false;
+
+// Timer Variables
+
+let tInterval;
+let startTime;
+let updatedTime;
+let difference;
+let stopTime;
+let savedTime;
+
+let running = false;
+let paused = false;
 
 // LocalStorage: Score
 
@@ -194,23 +237,6 @@ function validate(arithProblem, inputResult) {
 
 // UI
 
-const display = document.querySelector("#displayQuestion");
-const alerts = document.querySelector("#displayAlert");
-const form = document.querySelector("#form");
-const input = document.querySelector("#inputResult");
-const send = document.querySelector(".send");
-const span = document.querySelector("#span");
-const move = document.querySelector(".move");
-const reset = document.querySelector(".reset");
-const timeOutput = document.querySelector("#stopwatch");
-const message = document.querySelector("#message")
-const finishMessage = document.querySelector("#finish-message");
-const icons = document.querySelector("#svg-icons");
-
-let hasBeenGenerated = false;
-let hasBeenSubmitted = false;
-
-
 // Display question
 
 function formHidden(value) {
@@ -295,7 +321,7 @@ function displayAlert(correct) {
 
 // Display Score
 
-const boxes = document.querySelectorAll(".box");
+
 
 /* function displayScore() {
     let score = Number(getScore());
@@ -392,16 +418,6 @@ function newGame() {
 
 
 // Timer
-
-let tInterval;
-let startTime;
-let updatedTime;
-let difference;
-let stopTime;
-let savedTime;
-
-let running = false;
-let paused = false;
 
 function convertMilliseconds(ms) {
     let minutes = Math.floor((ms / (1000 * 60)) % 60);
@@ -577,13 +593,6 @@ window.addEventListener("beforeunload", () => {
 
 
 // Modal
-
-const openRanking = document.querySelector("#open-ranking");
-const modalRanking = document.querySelector("#bt-modal");
-const closeRanking = document.querySelector("#close-best-times");
-const olRanking = document.querySelector("#best-times");
-const ranking = document.querySelector("#bt-modal-body");
-const clear = document.querySelector("#clear-best-times");
 
 openRanking.addEventListener("click", () => {
     displayRanking();
