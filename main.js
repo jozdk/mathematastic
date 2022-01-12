@@ -27,6 +27,10 @@ const clear = document.querySelector("#clear-best-times");
 
 // Global Variables
 
+const success = ["Super!", "Allererste Sahne!", "Genial!", "Spitzenmäßig!", "Weiter so!"];
+const fail = ["Faaaaalsch!", "Vielleicht beim nächsten Mal!", "Das kannst du besser!", "Versuch's nochmal!", "Sei kein Mathe-Muffel!"]
+
+let arithProblem;
 let hasBeenGenerated = false;
 let hasBeenSubmitted = false;
 
@@ -47,25 +51,14 @@ let paused = false;
 // Get Score
 
 function getScore() {
-    let score;
-    if (localStorage.getItem("score") != null) {
-        score = localStorage.getItem("score");
-    } else {
-        score = 0;
-    }
-    return score;
+    return Number(localStorage.getItem("score")) || 0;
 }
 
 // Set Score
 
 function setScore() {
-    let newScore = Number(getScore()) + 1;
-    localStorage.setItem("score", newScore);
+    localStorage.setItem("score", getScore() + 1);
 }
-
-/*function setScore(score) {
-    localStorage.setItem("score", score);
-}*/
 
 // Clear Score
 
@@ -77,14 +70,7 @@ function clearScore() {
 // LocalStorage: Current question
 
 function getCurrentQuestion() {
-    let currentQuestion;
-    if (localStorage.getItem("currentQuestion") == null) {
-        currentQuestion = null;
-    } else {
-        currentQuestion = JSON.parse(localStorage.getItem("currentQuestion"));
-        console.log(currentQuestion);
-    }
-    return currentQuestion;
+    return JSON.parse(localStorage.getItem("currentQuestion"));
 }
 
 function setCurrentQuestion(arithProblem) {
@@ -92,7 +78,7 @@ function setCurrentQuestion(arithProblem) {
 }
 
 function clearCurrentQuestion() {
-    if (getCurrentQuestion != null) {
+    if (getCurrentQuestion()) {
         localStorage.removeItem("currentQuestion");
     }
 
@@ -101,22 +87,14 @@ function clearCurrentQuestion() {
 // LocalStorage: Best Times
 
 function getBestTimes() {
-    if (localStorage.getItem("bestTimes") == null) {
-        console.log("getBestTimes denkt, es ist nichts im localStorage");
-        return null;
-    } else {
-        let bestTimes = JSON.parse(localStorage.getItem("bestTimes"));
-        console.log(bestTimes);
-        return bestTimes;
-    }
+    return JSON.parse(localStorage.getItem("bestTimes"));
 }
 
 function setBestTimes(finishTime) {
     let bestTimes = getBestTimes();
     console.log(bestTimes);
-    if (finishTime != null) {
-        if (bestTimes == null) {
-            console.log("setBestTimes denkt, da sind null bestTimes");
+    if (finishTime) {
+        if (bestTimes === null) {
             bestTimes = [finishTime];
             localStorage.setItem("bestTimes", JSON.stringify(bestTimes));
         } else {
@@ -132,20 +110,16 @@ function setBestTimes(finishTime) {
 }
 
 function clearBestTimes() {
-    if (getBestTimes() != null) {
-        // LocalStorage
+    if (getBestTimes() !== null) {
         console.log("best times deleted");
         localStorage.removeItem("bestTimes");
-
     }
-
 }
 
 // LocalStorage: Timer Values
 
 function getTimerValues() {
-    let timerValues = JSON.parse(localStorage.getItem("timerValues"));
-    return timerValues;
+    return JSON.parse(localStorage.getItem("timerValues"));
 }
 
 function setTimerValues(splitTime, running, paused) {
@@ -157,8 +131,6 @@ function clearTimerValues() {
 }
 
 // Generate arithmetic problem
-
-var arithProblem;
 
 function getRandomInt() {
     return Math.floor(Math.random() * (100 - 2) + 2);
@@ -179,14 +151,14 @@ function generate() {
     let operator = chooseOperator();
     let zahl2 = getRandomInt();
 
-    if (operator == "&divide;") {
-        while (zahl1 % zahl2 != 0 || zahl1 == 0 || zahl2 < 2 || zahl2 > 11 || zahl1 / zahl2 == 1) {
+    if (operator === "&divide;") {
+        while (zahl1 % zahl2 !== 0 || zahl2 < 2 || zahl2 > 11 || zahl1 / zahl2 === 1) {
             zahl1 = getRandomInt();
             zahl2 = getInt1to10();
         }
     }
 
-    if (operator == "&times;" && zahl2 > 10) {
+    if (operator === "&times;" && zahl2 > 10) {
         zahl2 = getInt1to10();
     }
 
@@ -213,13 +185,10 @@ function validate(arithProblem, inputResult) {
         case "&divide;":
             result = num1 / num2;
             break;
-        default:
-            console.log("problem");
-            break;
     }
     console.log(result);
     console.log(inputResult);
-    if (result == inputResult) {
+    if (result === inputResult) {
         pauseTimer();
         console.log("true");
         displayAlert(true);
@@ -246,7 +215,7 @@ function formHidden(value) {
 }
 
 function removeQuestion() {
-    if (span.innerHTML != "") {
+    if (span.innerHTML !== "") {
         span.innerHTML = "";
         formHidden(true);
     }
@@ -285,35 +254,18 @@ function displayQuestion() {
 
 // Success/Fail Alert
 
-const success = ["Super!", "Allererste Sahne!", "Genial!", "Spitzenmäßig!", "Weiter so!"];
-const fail = ["Faaaaalsch!", "Vielleicht beim nächsten Mal!", "Das kannst du besser!", "Versuch's nochmal!", "Sei kein Mathe-Muffel!"]
-
 function displayAlert(correct) {
-    // const success = document.createTextNode("Super!");
-    // const check = document.createElement("img");
-    // check.src = "Images/checkmark.png";
-    // const fail = document.createTextNode("Faaaaalsch!");
-    let random = Math.floor(Math.random() * 5);
     
     removeAlert();
 
     if (correct) {
-        // alerts.appendChild(check);
-        // alerts.appendChild(success);
-        // alerts.innerHTML = `<img src='Images/checkmark.png'> <br> ${success[random]}`;
-        // alerts.innerHTML = `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16 check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>`;
         icons.firstElementChild.style.visibility = "visible";
-        message.innerHTML = `${success[random]}`;
-        
-
+        message.innerHTML = `${success[Math.floor(Math.random() * success.length)]}`;
         hasBeenSubmitted = true;
         hasBeenGenerated = false;
     } else {
-        // alerts.innerHTML = "<img src='Images/cross.png'> <br> Faaaaalsch!";
-        // alerts.innerHTML = `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 cross" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg> <br> ${fail[random]}`;
-        // alerts.appendChild(fail);
         icons.lastElementChild.style.visibility = "visible";
-        message.innerHTML = `${fail[random]}`;
+        message.innerHTML = `${fail[Math.floor(Math.random() * fail.length)]}`;
     }
 
 }
@@ -321,33 +273,13 @@ function displayAlert(correct) {
 
 // Display Score
 
-
-
-/* function displayScore() {
-    let score = Number(getScore());
-    let arr = Array.from(boxes);
-    if(score === 0) {
-        move.value = "New Game";
-    }
-    for(let box of arr) {
-        if(Number(box.innerHTML) === score) {
-            clearFields();
-            box.classList.add("orange");
-            if(Number(box.innerHTML) === 1) {
-                console.log(box.innerHTML);
-                move.value = "Move";
-            } 
-                      
-        }
-    }    
- 
-} */
-
 function displayScore() {
+
     let currentQuestion = getCurrentQuestion();
     let score = getScore();
     let currentBox = ".box" + score;
     let previousBox = ".box" + (score - 1);
+
     if (score > 0 && score <= 9) {
         document.querySelector(currentBox).classList.add("orange");
     }
@@ -355,8 +287,7 @@ function displayScore() {
         document.querySelector(previousBox).classList.remove("orange");
     }
 
-
-    if (score == 0) {
+    if (score === 0) {
         move.value = "New Game";
     } else {
         move.value = "Move";
@@ -369,7 +300,6 @@ function displayScore() {
         alerts.insertBefore(congratulations, alerts.childNodes[0]);
 
         message.innerHTML = "Das war <br> <b><span>M</span>athema<span>t</span>astic</b>!";
-        // finishMessage.innerHTML = "Herzlichen Glückwunsch!"
         
         if (icons.firstElementChild.style.visibility !== "visible") {
             icons.firstElementChild.style.visibility = "visible";
@@ -377,11 +307,9 @@ function displayScore() {
         console.log(savedTime);
         setBestTimes(savedTime);
 
-        // newGame();
-
     }
 
-    if (currentQuestion != null) {
+    if (currentQuestion) {
         arithProblem = currentQuestion;
         span.innerHTML = `${arithProblem[0]} ${arithProblem[2]} ${arithProblem[1]} = `;
         formHidden(false);
@@ -449,7 +377,7 @@ function startTimer() {
 
         timeOutput.innerHTML = `${time[0]}:${time[1]}:${time[2]}`;
 
-    }, 1);
+    }, 10);
 
     running = true;
     paused = false;
@@ -511,14 +439,16 @@ function refreshTimerValues() {
     }
 }
 
-// Event: Load score & Timer values
+// Event handling
+
+// Load score & Timer values
 
 document.addEventListener("DOMContentLoaded", () => {
     displayScore();
     refreshTimerValues();
 });
 
-// Event: Move
+// Move
 
 move.addEventListener("click", () => {
     const score = getScore();
@@ -547,25 +477,18 @@ window.addEventListener("keydown", (event) => {
 })
 
 
-// Event: Submit Result
-
-// form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     if (hasBeenSubmitted == false) {
-//         validate(arithProblem, input.value);
-//     }
-// });
+// Submit Result
 
 input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         console.log("Element that triggered event: " + event.target.id);
         if (hasBeenSubmitted == false) {
-            validate(arithProblem, input.value);
+            validate(arithProblem, Number(input.value));
         }
     } 
 });
 
-// Event: Reset
+// Reset
 
 reset.addEventListener("click", newGame);
 
@@ -575,7 +498,7 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
-// Event: Save Timer values to LocalStorage
+// Save Timer values to Local Storage
 
 window.addEventListener("beforeunload", () => {
     if (!paused && running) {
@@ -592,7 +515,7 @@ window.addEventListener("beforeunload", () => {
 });
 
 
-// Modal
+// Personal Best Times Modal
 
 openRanking.addEventListener("click", () => {
     displayRanking();
@@ -602,28 +525,26 @@ openRanking.addEventListener("click", () => {
 closeRanking.addEventListener("click", () => modalRanking.style.display = "none");
 
 window.addEventListener("click", (event) => {
-    if (event.target == modalRanking) {
+    if (event.target === modalRanking) {
         modalRanking.style.display = "none";
     }
 });
 
 function displayRanking() {
     let bestTimes = getBestTimes();
-    console.log("displayRanking hat: " + bestTimes);
+    console.log(bestTimes);
+
     if (bestTimes) {
         ranking.firstElementChild.innerHTML = "";
         let time;
         let output = "";
+        
         bestTimes.forEach(i => {
             time = convertMilliseconds(i);
             output += `<li> ${time[0]}:${time[1]}:${time[2]} </li>`;
         });
 
         olRanking.innerHTML = output;
-
-        // for(let i of bestTimes) {
-        //     olRanking.innerHTML = `<li> ${i} </li>`;
-        // }
     } else {
         olRanking.innerHTML = "";
         ranking.firstElementChild.innerHTML = "There are no personal best times yet.";
