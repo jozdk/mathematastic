@@ -92,7 +92,6 @@ function getBestTimes() {
 
 function setBestTimes(finishTime) {
     let bestTimes = getBestTimes();
-    console.log(bestTimes);
     if (finishTime) {
         if (bestTimes === null) {
             bestTimes = [finishTime];
@@ -186,11 +185,8 @@ function validate(arithProblem, inputResult) {
             result = num1 / num2;
             break;
     }
-    console.log(result);
-    console.log(inputResult);
     if (result === inputResult) {
         pauseTimer();
-        console.log("true");
         displayAlert(true);
         setScore();
         clearCurrentQuestion();
@@ -198,7 +194,6 @@ function validate(arithProblem, inputResult) {
         input.blur();
         return true;
     } else {
-        console.log("false");
         displayAlert(false);
         return false;
     }
@@ -304,7 +299,6 @@ function displayScore() {
         if (icons.firstElementChild.style.visibility !== "visible") {
             icons.firstElementChild.style.visibility = "visible";
         }
-        console.log(savedTime);
         setBestTimes(savedTime);
 
     }
@@ -399,8 +393,6 @@ function pauseTimer() {
             savedTime = stopTime - startTime;
         }
 
-        console.log(savedTime);
-
         let time = convertMilliseconds(savedTime);
 
         timeOutput.innerHTML = `${time[0]}:${time[1]}:${time[2]}`;
@@ -464,7 +456,6 @@ move.addEventListener("click", () => {
 
 window.addEventListener("keydown", (event) => {
     if (event.target.id !== "inputResult" && event.key === "Enter" ) {
-        console.log("Element that triggered event: " + event.target.nodeName + event.target.id);
         const score = getScore();
         if (hasBeenGenerated == false && score < 9) {
             displayQuestion();
@@ -481,7 +472,6 @@ window.addEventListener("keydown", (event) => {
 
 input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-        console.log("Element that triggered event: " + event.target.id);
         if (hasBeenSubmitted == false) {
             validate(arithProblem, Number(input.value));
         }
@@ -505,7 +495,7 @@ window.addEventListener("beforeunload", () => {
         clearInterval(tInterval);
         stopTime = Date.now();
 
-        if (savedTime != null) {
+        if (savedTime) {
             savedTime += stopTime - startTime;
         } else {
             savedTime = stopTime - startTime;
