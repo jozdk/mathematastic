@@ -13,8 +13,10 @@ const reset = document.querySelector(".reset");
 const timeOutput = document.querySelector("#stopwatch");
 const message = document.querySelector("#message")
 const finishMessage = document.querySelector("#finish-message");
-const icons = document.querySelector("#svg-icons");
 const boxes = document.querySelectorAll(".box");
+const icons = document.querySelector("#svg-icons");
+const successIcon = document.querySelector("#success-icon");
+const failIcon = document.querySelector("#fail-icon");
 
 // Modal Elements
 
@@ -28,7 +30,7 @@ const clear = document.querySelector("#clear-best-times");
 // Global Variables
 
 const success = ["Super!", "Allererste Sahne!", "Genial!", "Spitzenmäßig!", "Weiter so!"];
-const fail = ["Faaaaalsch!", "Vielleicht beim nächsten Mal!", "Das kannst du besser!", "Versuch's nochmal!", "Sei kein Mathe-Muffel!"]
+const fail = ["Faaaaalsch!", "Pech gehabt!", "Das kannst du besser!", "Versuch's nochmal!", "Sei kein Mathe-Muffel!"]
 
 let arithProblem;
 let hasBeenGenerated = false;
@@ -219,20 +221,20 @@ function removeQuestion() {
 }
 
 function removeAlert() {
-    if (icons.firstElementChild.style.visibility === "visible") {
-        icons.firstElementChild.style.visibility = "collapse";
+    if (successIcon.style.display === "inline") {
+        successIcon.style.display = "";
     }
 
-    if (icons.lastElementChild.style.visibility === "visible") {
-        icons.lastElementChild.style.visibility = "collapse";
+    if (failIcon.style.display === "inline") {
+        failIcon.style.display = "";
     }
 
     if (message.innerHTML !== "") {
         message.innerHTML = "";
     }
 
-    if (alerts.childNodes[0].tagName === "P" ) {
-        alerts.childNodes[0].remove();
+    if (finishMessage.style.display === "block") {
+        finishMessage.style.display = "none";
     }
 }
 
@@ -254,12 +256,12 @@ function displayAlert(correct) {
     removeAlert();
 
     if (correct) {
-        icons.firstElementChild.style.visibility = "visible";
+        successIcon.style.display = "inline";
         message.innerHTML = `${success[Math.floor(Math.random() * success.length)]}`;
         hasBeenSubmitted = true;
         hasBeenGenerated = false;
     } else {
-        icons.lastElementChild.style.visibility = "visible";
+        failIcon.style.display = "inline";
         message.innerHTML = `${fail[Math.floor(Math.random() * fail.length)]}`;
     }
 
@@ -289,18 +291,26 @@ function displayScore() {
     }
 
     if (score >= 9) {
-        let congratulations = document.createElement("p");
-        let textNode = document.createTextNode("Herzlichen Glückwunsch!");
-        congratulations.appendChild(textNode);
-        alerts.insertBefore(congratulations, alerts.childNodes[0]);
 
+        // const congratulations = document.createElement("p");
+        // congratulations.style.width = "33%";
+        // congratulations.style.fontSize = "1.6rem";
+        // congratulations.style.flexShrink = "0";
+        // let textNode = document.createTextNode("Herzlichen Glückwunsch!");
+        // congratulations.appendChild(textNode);
+        // alerts.insertBefore(congratulations, alerts.childNodes[0]);
+        
+        if (parseInt(window.innerWidth) > 600) {
+            finishMessage.style.display = "block";
+        }
+        // finishMessage.style.display = "block";
         message.innerHTML = "Das war <br> <b><span>M</span>athema<span>t</span>astic</b>!";
         
-        if (icons.firstElementChild.style.visibility !== "visible") {
-            icons.firstElementChild.style.visibility = "visible";
+        if (successIcon.style.display !== "inline") {
+            successIcon.style.display = "inline";
         }
-        setBestTimes(savedTime);
 
+        setBestTimes(savedTime);
     }
 
     if (currentQuestion) {

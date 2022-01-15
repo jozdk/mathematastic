@@ -31,7 +31,7 @@ h1 span {
     color: darkorange;
 }
 
-#displayAlert p span {
+#message span {
     color: darkorange;
     font-size: 2.3rem;
 }
@@ -56,7 +56,7 @@ h1 span {
 
 #form {
     display: inline-block;
-    margin: 0 1em;
+    margin: 15px 1em;
 }
 
 #displayAlert {
@@ -69,13 +69,19 @@ h1 span {
 }
 
 #displayAlert p {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#finish-message {
+    display: none;
 }
 
 #svg-icons {
-    display: flex;
+    display:flex;
     justify-content: center;
+    align-items: center;
+    /* margin: 0 10px; */
 }
 
 #container {
@@ -162,6 +168,7 @@ h1 span {
 
 .cross {
     color: #6A0DAD;
+    color: #750EBE;
     width: 100px;
     height: 100px;
 }
@@ -176,7 +183,7 @@ footer {
 #stopwatch {
     text-align: center;
     padding: 8px;
-    font-size: 20px;
+    font-size: 1.3rem;
     grid-row-start: 1;
     grid-column-start: col2;
     grid-column-end: col3;
@@ -217,7 +224,7 @@ footer {
     width: 60%;
     margin: 5% auto;
     padding: 0;
-    border: 1px solid rebeccapurple;
+    border: 1px solid #750EBE;
     box-shadow: 3px 5px 8px 0 rgba(0, 0, 0, 0.2);
     animation-name: animatetop;
     animation-duration: 0.3s;
@@ -242,7 +249,7 @@ footer {
 
 .modal-header, .modal-footer {
     padding: 10px 15px;
-    background-color: rebeccapurple;
+    background-color: #750EBE;
     color: white;
 }
 
@@ -283,18 +290,10 @@ footer {
 
     #displayQuestion {
         min-width: 0;
-        font-size: 1.8rem;
-        letter-spacing: 2px;
-    }
-
-    #inputResult {
-        font-size: 1.8rem;
     }
 
     #displayAlert {
         min-width: 0;
-        font-size: 1.8rem;
-        letter-spacing: 2px;
     }
 
     #container {
@@ -304,8 +303,6 @@ footer {
     #board {
         width: max(30vw, 385px);
         height: max(30vw, 385px);
-        grid-gap: 4px;
-        margin: 0;
         margin-top: 10px;
     }
 
@@ -339,25 +336,54 @@ footer {
     #displayAlert {
         display: flex;
         justify-content: center;
-        width: 100%;
+        align-items: center;
+        width: 95%;
+        margin: auto;
         min-width: 0;
         grid-row-start: row3;
         grid-row-end: last;
     }
 
-    #svg-icons {
-        justify-content: center;
-        align-self: center;
+    #finish-message {
+        width: 33%;
+        /* width: 33%; */
+        font-size: 1.6rem;
+        /* background-color: lightgray; */
+        flex-shrink: 0;
     }
 
-    #displayAlert p {
+    #message {
+        /* width: 300px; */
+        width: 40%;
+        width: 33%;
+        /* width: 33%; */
+        font-size: 1.6rem;
+        /* background-color: aliceblue; */
+        flex-shrink: 0;
+    }
+
+    #svg-icons {
+        /* justify-content: center; */
+        /* align-self: center; */
+        width: 33%;
+        /* width: 33%; */
+        /* background-color: antiquewhite; */
+        
+    }
+
+    #message span {
+        font-size: 2rem;
+    }
+
+    /* #displayAlert p {
         align-self: center;
         width: 300px;
-    }
+    } */
 
     #container {
         width: 100%;
         min-width: 45vh;
+        min-width: 420px;
         grid-row-start: row2;
         grid-row-end: row3;
         justify-content: center;
@@ -365,14 +391,24 @@ footer {
 
     #board {
         width: 40vh;
-        min-width: 385px;
+        min-width: 365px;
         height: 40vh;
-        min-height: 385px;
-        grid-gap: 4px;
+        min-height: 365px;
+        margin-top: 0;
     }
 
     #controls {
         white-space: nowrap;
+    }
+
+    @media screen and (max-height: 880px) {
+        header {
+            padding: 0;
+        }
+
+        #super-container {
+            grid-template-rows: [row1] 10% [row2] 70% [row3] 20% [last];
+        }
     }
 }
 
@@ -389,59 +425,55 @@ footer {
     }
 
     h1 {
-        font-size: 1.8rem;
         margin: .3em .5em;
     }
     
     h1 span {
-        font-size: 2rem;
+        font-size: 3rem;
         color: darkorange;
     }
 
     #super-container {
-        display: grid;
-        grid-template-rows: [row1] 20% [row2] 60% [row3] 20% [last];
+        grid-template-rows: [row1] 15% [row2] 65% [row3] 20% [last];
     }
     
-    #displayQuestion {
+    /* #displayQuestion {
         width: 100%;
         min-width: 0;
         grid-row-start: row1;
         grid-row-end: row2;
-    }
+    } */
 
     #inputResult {
-        font-size: 1.9rem;
         width: 60px;
     }
 
     #form {
-        display: inline-block;
-        margin: 0 .3em;
+        margin: 10px .3em;
     }
     
     #displayAlert {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-        min-width: 0;
+        /* display: flex; */
+        justify-content: space-evenly;
+        /* min-width: 0;
         grid-row-start: row3;
-        grid-row-end: last;
-    }
-
-    #displayAlert svg, #displayAlert p {
-        margin: 0 10px;
+        grid-row-end: last; */
+        /* border: 2px solid black; */
     }
 
     #displayAlert p {
         display: none;
+        font-size: 1.4rem;
+        /* background-color: antiquewhite; */
+        min-width: 175px;
     }
 
+    /* #svg-icons {
+        background-color: aliceblue;
+    } */
+
     #container {
-        width: 100%;
         min-width: 0;
-        grid-row-start: row2;
-        grid-row-end: row3;
     }
 
     #board {
@@ -450,8 +482,7 @@ footer {
         height: 40vh;
         min-height: 265px;
         align-self: center;
-        grid-gap: 4px;
-        margin: 0;
+        margin-top: 0;
     }
 
     .box {
@@ -464,11 +495,10 @@ footer {
 
     .btn {
         width: 120px;
-        margin: 0 10px;
-        margin: 10px 10px; /* Bin mir noch nicht ganz sicher, ob ich oben-unten-margins einbauen will, siehe line above */
+        margin: 10px 10px;
     }
 
-    #stopwatch {
+    /* #stopwatch {
         font-size: 25px;
-    }
+    } */
 }
