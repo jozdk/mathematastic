@@ -436,4 +436,9 @@ footer {
         width: 120px;
         margin: 10px 10px;
     }
+
+    #controls2 img {
+        width: 55px;
+        height: auto;
+    }
 }
