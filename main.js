@@ -226,8 +226,8 @@ function removeAlert() {
         message.innerHTML = "";
     }
 
-    if (finishMessage.style.display === "block") {
-        finishMessage.style.display = "none";
+    if (alerts.childNodes[0].tagName === "P" ) {
+        alerts.childNodes[0].remove();
     }
 }
 
@@ -284,10 +284,12 @@ function displayScore() {
 
     if (score >= 9) {
         
-        if (parseInt(window.innerWidth) > 600) {
-            finishMessage.style.display = "block";
-        }
-        
+        let congratulations = document.createElement("p");
+        let textNode = document.createTextNode("Herzlichen Glückwunsch!");
+        congratulations.appendChild(textNode);
+        congratulations.classList.add("congrats-medium");
+        alerts.insertBefore(congratulations, alerts.childNodes[0]);
+
         message.innerHTML = "Das war <br> <b><span>M</span>athema<span>t</span>astic</b>!";
         
         if (successIcon.style.display !== "inline") {

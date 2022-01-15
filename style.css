@@ -72,10 +72,6 @@ h1 span {
     margin-right: 10px;
 }
 
-#finish-message {
-    display: none;
-}
-
 #svg-icons {
     display:flex;
     justify-content: center;
@@ -311,6 +307,7 @@ footer {
 
     #super-container {
         display: grid;
+        justify-content: normal;
         grid-template-rows: [row1] 20% [row2] 60% [row3] 20% [last];
     }
     
@@ -331,7 +328,12 @@ footer {
         grid-row-end: last;
     }
 
-    #finish-message {
+    #displayAlert p {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .congrats-medium {
         width: 33%;
         font-size: 1.6rem;
         flex-shrink: 0;
@@ -413,11 +415,6 @@ footer {
 
     #displayAlert p {
         display: none;
-    }
-
-    #finish-message {
-        font-size: 1.4rem;
-        min-width: 175px;
     }
 
     #board {
