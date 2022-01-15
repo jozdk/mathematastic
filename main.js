@@ -48,28 +48,21 @@ let savedTime;
 let running = false;
 let paused = false;
 
-// LocalStorage: Score
-
-// Get Score
+// Local Storage: Score
 
 function getScore() {
     return Number(localStorage.getItem("score")) || 0;
 }
 
-// Set Score
-
 function setScore() {
     localStorage.setItem("score", getScore() + 1);
 }
-
-// Clear Score
 
 function clearScore() {
     localStorage.removeItem("score");
 }
 
-
-// LocalStorage: Current question
+// Local Storage: Current question
 
 function getCurrentQuestion() {
     return JSON.parse(localStorage.getItem("currentQuestion"));
@@ -86,7 +79,7 @@ function clearCurrentQuestion() {
 
 }
 
-// LocalStorage: Best Times
+// Local Storage: Best Times
 
 function getBestTimes() {
     return JSON.parse(localStorage.getItem("bestTimes"));
@@ -101,7 +94,7 @@ function setBestTimes(finishTime) {
         } else {
             bestTimes.push(finishTime);
             bestTimes.sort((a, b) => a - b);
-            if (bestTimes.length > 5) {
+            if (bestTimes.length > 10) {
                 bestTimes.pop();
             }
             localStorage.setItem("bestTimes", JSON.stringify(bestTimes));
@@ -117,7 +110,7 @@ function clearBestTimes() {
     }
 }
 
-// LocalStorage: Timer Values
+// Local Storage: Timer Values
 
 function getTimerValues() {
     return JSON.parse(localStorage.getItem("timerValues"));
@@ -267,7 +260,6 @@ function displayAlert(correct) {
 
 }
 
-
 // Display Score
 
 function displayScore() {
@@ -291,19 +283,11 @@ function displayScore() {
     }
 
     if (score >= 9) {
-
-        // const congratulations = document.createElement("p");
-        // congratulations.style.width = "33%";
-        // congratulations.style.fontSize = "1.6rem";
-        // congratulations.style.flexShrink = "0";
-        // let textNode = document.createTextNode("Herzlichen Glückwunsch!");
-        // congratulations.appendChild(textNode);
-        // alerts.insertBefore(congratulations, alerts.childNodes[0]);
         
         if (parseInt(window.innerWidth) > 600) {
             finishMessage.style.display = "block";
         }
-        // finishMessage.style.display = "block";
+        
         message.innerHTML = "Das war <br> <b><span>M</span>athema<span>t</span>astic</b>!";
         
         if (successIcon.style.display !== "inline") {
@@ -323,7 +307,6 @@ function displayScore() {
     }
 
 }
-
 
 // Clear Fields
 
@@ -347,7 +330,6 @@ function newGame() {
     clearFields();
     hasBeenGenerated = false;
 }
-
 
 // Timer
 
@@ -385,7 +367,6 @@ function startTimer() {
 
     running = true;
     paused = false;
-
 
 }
 
@@ -441,94 +422,7 @@ function refreshTimerValues() {
     }
 }
 
-// Event handling
-
-// Load score & Timer values
-
-document.addEventListener("DOMContentLoaded", () => {
-    displayScore();
-    refreshTimerValues();
-});
-
-// Move
-
-move.addEventListener("click", () => {
-    const score = getScore();
-    if (hasBeenGenerated == false && score < 9) {
-        displayQuestion();
-        startTimer();
-        hasBeenGenerated = true;
-    } else {
-        input.focus();
-    }
-
-});
-
-window.addEventListener("keydown", (event) => {
-    if (event.target.id !== "inputResult" && event.key === "Enter" ) {
-        const score = getScore();
-        if (hasBeenGenerated == false && score < 9) {
-            displayQuestion();
-            startTimer();
-            hasBeenGenerated = true;
-        } else {
-            input.focus();
-        }
-    }
-})
-
-
-// Submit Result
-
-input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        if (hasBeenSubmitted == false) {
-            validate(arithProblem, Number(input.value));
-        }
-    } 
-});
-
-// Reset
-
-reset.addEventListener("click", newGame);
-
-window.addEventListener("keydown", (event) => {
-    if (event.key === "r") {
-        newGame();
-    }
-})
-
-// Save Timer values to Local Storage
-
-window.addEventListener("beforeunload", () => {
-    if (!paused && running) {
-        clearInterval(tInterval);
-        stopTime = Date.now();
-
-        if (savedTime) {
-            savedTime += stopTime - startTime;
-        } else {
-            savedTime = stopTime - startTime;
-        }
-    }
-    setTimerValues(savedTime, running, paused);
-});
-
-
-// Personal Best Times Modal
-
-openRanking.addEventListener("click", () => {
-    displayRanking();
-    modalRanking.style.display = "block";
-});
-
-closeRanking.addEventListener("click", () => modalRanking.style.display = "none");
-
-window.addEventListener("click", (event) => {
-    if (event.target === modalRanking) {
-        modalRanking.style.display = "none";
-    }
-});
+// Personal Best Times
 
 function displayRanking() {
     let bestTimes = getBestTimes();
@@ -551,6 +445,97 @@ function displayRanking() {
     }
 }
 
+// Event handling
+
+// Load score & Timer values
+
+document.addEventListener("DOMContentLoaded", () => {
+    displayScore();
+    refreshTimerValues();
+});
+
+// Move
+
+move.addEventListener("click", () => {
+    const score = getScore();
+    if (!hasBeenGenerated && score < 9) {
+        displayQuestion();
+        startTimer();
+        hasBeenGenerated = true;
+    } else {
+        input.focus();
+    }
+});
+
+window.addEventListener("keydown", (event) => {
+    if (event.target.id !== "inputResult" && event.key === "Enter" ) {
+        const score = getScore();
+        if (!hasBeenGenerated && score < 9) {
+            displayQuestion();
+            startTimer();
+            hasBeenGenerated = true;
+        } else {
+            input.focus();
+        }
+    }
+})
+
+// Submit Result
+
+input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        if (!hasBeenSubmitted) {
+            validate(arithProblem, Number(input.value));
+        }
+    } 
+});
+
+send.addEventListener("click", () => {
+    if (!hasBeenSubmitted) {
+        validate(arithProblem, Number(input.value));
+    }
+})
+
+// Reset
+
+reset.addEventListener("click", newGame);
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "r") {
+        newGame();
+    }
+})
+
+// Save Timer Values to Local Storage
+
+window.addEventListener("beforeunload", () => {
+    if (!paused && running) {
+        clearInterval(tInterval);
+        stopTime = Date.now();
+
+        if (savedTime) {
+            savedTime += stopTime - startTime;
+        } else {
+            savedTime = stopTime - startTime;
+        }
+    }
+    setTimerValues(savedTime, running, paused);
+});
+
+// Open, Close & Delete Personal Best Times
+
+openRanking.addEventListener("click", () => {
+    displayRanking();
+    modalRanking.style.display = "block";
+});
+
+closeRanking.addEventListener("click", () => modalRanking.style.display = "none");
+
+window.addEventListener("click", (event) => {
+    if (event.target === modalRanking) {
+        modalRanking.style.display = "none";
+    }
+});
 
 clear.addEventListener("click", () => {
     clearBestTimes();
