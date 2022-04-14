@@ -21,7 +21,7 @@ header {
 h1 {
     text-align: center;
     font-size: 3rem;
-    margin-bottom: 0.5em;
+    margin: 0.5em 0;
 }
 
 h1 span {
@@ -38,8 +38,8 @@ h1 span {
     display: flex;
     flex: 1;
     justify-content: space-evenly;
-    border-top: 5px solid #808080;
-    border-bottom: 5px solid #808080;
+    border-top: 3px solid #808080;
+    border-bottom: 3px solid #808080;
 }
 
 #displayQuestion {
@@ -76,7 +76,6 @@ h1 span {
     display:flex;
     justify-content: center;
     align-items: center;
-    /* margin: 0 10px; */
 }
 
 #container {
@@ -114,6 +113,7 @@ h1 span {
     padding: 10px 15px;
     width: 150px;
     border: none;
+    -webkit-appearance: none;
 }
 
 .btn:hover, .send:hover, #clear-best-times:hover {
@@ -131,6 +131,7 @@ h1 span {
     font-size: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #353248;
+    width: 70px;
 }
 
 .send {
@@ -157,35 +158,29 @@ h1 span {
 }
 
 footer {
-    display: grid;
-    grid-template-columns: [col1] 33.33% [col2] 33.33% [col3] 33.33%;
-    justify-content: space-evenly;
-    box-sizing: border-box;
+    display: flex;
+}
+
+#pseudo-element {
+    flex: 1;
 }
 
 #stopwatch {
     text-align: center;
     padding: 8px;
     font-size: 1.3rem;
-    grid-column-start: col2;
-    grid-column-end: col3;
-    box-sizing:border-box;
 }
 
 #controls2 {
-    grid-column-start: col3;
-    grid-column-end: span col3;
     display: flex;
-    justify-content: end;
-    align-items: center;
+    flex: 1;
 }
 
-#controls2 img {
-    margin: 0 5px;
-}
-
-#open-ranking:hover {
+#open-ranking {
     cursor: pointer;
+    width: 35px;
+    padding: 5px;
+    margin-left: auto;
 }
 
 .modal {
@@ -257,12 +252,11 @@ footer {
 @media screen and (max-width: 1200px) {
     header {
         align-items: center;
-        padding: 1em;
+        padding: 0;
     }
 
     header img {
-        width: 85px;
-        height: 108px;
+        width: 65px;
     }
 
     header h1 {
@@ -270,7 +264,7 @@ footer {
     }
 
     h1 span {
-        font-size: 3.1rem;
+        font-size: 3rem;
     }
 
     #displayQuestion {
@@ -279,6 +273,11 @@ footer {
 
     #displayAlert {
         min-width: 0;
+        font-size: 1.6rem;
+    }
+
+    #message span {
+        font-size: 1.9rem;
     }
 
     #container {
@@ -296,27 +295,26 @@ footer {
     }
 
     .btn {
-        margin: 10px;
+        margin: 10px 10px 0;
+    }
+
+    #success-icon, #fail-icon {
+        width: 80px;
     }
 }
 
 
 @media screen and (max-width: 1080px) and (orientation: portrait) {
-    header {
-        padding: .8em;
-    }
-
     #super-container {
-        display: grid;
-        justify-content: normal;
-        grid-template-rows: [row1] 20% [row2] 60% [row3] 20% [last];
+        flex-direction: column;
+        min-height: 565px;
     }
     
     #displayQuestion {
         width: 95%;
-        margin: 0 auto;
-        grid-row-start: row1;
-        grid-row-end: row2;
+        margin: auto;
+        min-height: 100px;
+        align-items: center;
     }
 
     #displayAlert {
@@ -325,8 +323,7 @@ footer {
         align-items: center;
         width: 95%;
         margin: auto;
-        grid-row-start: row3;
-        grid-row-end: last;
+        min-height: 100px;
     }
 
     #displayAlert p {
@@ -336,13 +333,11 @@ footer {
 
     .congrats-medium {
         width: 33%;
-        font-size: 1.6rem;
         flex-shrink: 0;
     }
 
     #message {
         width: 33%;
-        font-size: 1.6rem;
         flex-shrink: 0;
     }
 
@@ -350,15 +345,9 @@ footer {
         width: 33%;
     }
 
-    #message span {
-        font-size: 1.8rem;
-    }
-
     #container {
         width: 100%;
         min-width: 0;
-        grid-row-start: row2;
-        grid-row-end: row3;
     }
 
     #board {
@@ -369,41 +358,32 @@ footer {
         margin-top: 0;
     }
 
-    @media screen and (max-height: 880px) {
-        header {
-            padding: 0;
-        }
+    .box {
+        font-size: 3.5rem;
+    }
 
-        #super-container {
-            grid-template-rows: [row1] 10% [row2] 70% [row3] 20% [last];
-        }
+    .bt-modal-content {
+        min-width: 80%;
     }
 }
 
 
 @media screen and (max-width: 600px) {
-    header {
-        padding: 0;
-    }
-
     header img {
         display: none;
     }
 
-    h1 {
-        margin: .3em .5em;
+    header h1 {
+        margin: .2em .4em;
+        font-size: 2rem;
     }
     
-    h1 span {
-        font-size: 3rem;
-    }
-
-    #super-container {
-        grid-template-rows: [row1] 15% [row2] 65% [row3] 20% [last];
+    header h1 span {
+        font-size: 2.3rem;
     }
 
     #inputResult {
-        width: 60px;
+        width: 62px;
     }
 
     #form {
@@ -419,24 +399,17 @@ footer {
     }
 
     #board {
-        width: 40vh;
-        min-width: 265px;
-        height: 40vh;
-        min-height: 265px;
-        margin-top: 0;
+        width: 30vh;
+        min-width: 255px;
+        height: 30vh;
+        min-height: 255px;
     }
 
     .box {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .btn {
-        width: 120px;
-        margin: 10px 10px;
-    }
-
-    #controls2 img {
-        width: 55px;
-        height: auto;
+        width: 115px;
     }
 }
