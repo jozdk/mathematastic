@@ -414,7 +414,6 @@ function refreshTimerValues() {
         savedTime = timerValues[0];
         running = timerValues[1];
         paused = timerValues[2];
-        console.log(timerValues);
         let time = convertMilliseconds(savedTime);
         timeOutput.innerHTML = `${time[0]}:${time[1]}:${time[2]}`;
         if (!paused && running) {
@@ -428,7 +427,6 @@ function refreshTimerValues() {
 
 function displayRanking() {
     let bestTimes = getBestTimes();
-    console.log(bestTimes);
 
     if (bestTimes) {
         ranking.firstElementChild.innerHTML = "";
