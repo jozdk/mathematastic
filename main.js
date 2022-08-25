@@ -283,7 +283,7 @@ function displayScore() {
     if (score === 0) {
         move.value = "New Game";
     } else {
-        move.value = "Move";
+        move.value = "Next";
     }
 
     if (score >= 9) {
