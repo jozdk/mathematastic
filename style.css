@@ -7,8 +7,9 @@ body {
 
 #page-container {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
+    height: 100vh;
+    height: var(--vh);
 }
 
 header {
@@ -307,7 +308,7 @@ footer {
 @media screen and (max-width: 1080px) and (orientation: portrait) {
     #super-container {
         flex-direction: column;
-        min-height: 565px;
+        min-height: 565px; /* prevents page-container fit small screen */
     }
     
     #displayQuestion {

@@ -48,6 +48,10 @@ let savedTime;
 let running = false;
 let paused = false;
 
+// Set CSS Variable
+
+document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+
 // Local Storage: Score
 
 function getScore() {
@@ -226,7 +230,7 @@ function removeAlert() {
         message.innerHTML = "";
     }
 
-    if (alerts.childNodes[0].tagName === "P" ) {
+    if (alerts.childNodes[0].tagName === "P") {
         alerts.childNodes[0].remove();
     }
 }
@@ -245,7 +249,7 @@ function displayQuestion() {
 // Success/Fail Alert
 
 function displayAlert(correct) {
-    
+
     removeAlert();
 
     if (correct) {
@@ -283,7 +287,7 @@ function displayScore() {
     }
 
     if (score >= 9) {
-        
+
         let congratulations = document.createElement("p");
         let textNode = document.createTextNode("Herzlichen Glückwunsch!");
         congratulations.appendChild(textNode);
@@ -291,7 +295,7 @@ function displayScore() {
         alerts.insertBefore(congratulations, alerts.childNodes[0]);
 
         message.innerHTML = "Das war <br> <b><span>M</span>athema<span>t</span>astic</b>!";
-        
+
         if (successIcon.style.display !== "inline") {
             successIcon.style.display = "inline";
         }
@@ -432,7 +436,7 @@ function displayRanking() {
         ranking.firstElementChild.innerHTML = "";
         let time;
         let output = "";
-        
+
         bestTimes.forEach(i => {
             time = convertMilliseconds(i);
             output += `<li> ${time[0]}:${time[1]}:${time[2]} </li>`;
@@ -468,7 +472,7 @@ move.addEventListener("click", () => {
 });
 
 window.addEventListener("keydown", (event) => {
-    if (event.target.id !== "inputResult" && event.key === "Enter" ) {
+    if (event.target.id !== "inputResult" && event.key === "Enter") {
         const score = getScore();
         if (!hasBeenGenerated && score < 9) {
             displayQuestion();
@@ -487,7 +491,7 @@ input.addEventListener("keydown", (event) => {
         if (!hasBeenSubmitted) {
             validate(arithProblem, Number(input.value));
         }
-    } 
+    }
 });
 
 send.addEventListener("click", () => {
@@ -521,6 +525,10 @@ window.addEventListener("beforeunload", () => {
     }
     setTimerValues(savedTime, running, paused);
 });
+
+window.addEventListener("resize", () => {
+    document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+})
 
 // Open, Close & Delete Personal Best Times
 
