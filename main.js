@@ -17,6 +17,7 @@ const boxes = document.querySelectorAll(".box");
 const icons = document.querySelector("#svg-icons");
 const successIcon = document.querySelector("#success-icon");
 const failIcon = document.querySelector("#fail-icon");
+const progressBar = document.querySelector("#progress-bar");
 
 // Modal Elements
 
@@ -29,8 +30,8 @@ const clear = document.querySelector("#clear-best-times");
 
 // Global Variables
 
-const success = ["Super!", "Allererste Sahne!", "Genial!", "Spitzenmäßig!", "Weiter so!"];
-const fail = ["Faaaaalsch!", "Pech gehabt!", "Das kannst du besser!", "Versuch's nochmal!", "Sei kein Mathe-Muffel!"]
+const success = ["Correct!", "Good Job!", "Awesome!", "Keep it up!", "Genius!"];
+const fail = ["Wrong!", "Tough luck!", "You can do better!", "Try again!", "Better luck next time!"]
 
 let arithProblem;
 let hasBeenGenerated = false;
@@ -50,7 +51,11 @@ let paused = false;
 
 // Set CSS Variable
 
-document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+document.documentElement.style.setProperty("--vh", window.innerWidth <= 1200
+    ? `${window.innerHeight}px`
+    : "100vh"
+);
+
 
 // Local Storage: Score
 
@@ -270,16 +275,9 @@ function displayScore() {
 
     let currentQuestion = getCurrentQuestion();
     let score = getScore();
-    let currentBox = ".box" + score;
-    let previousBox = ".box" + (score - 1);
-
-    if (score > 0 && score <= 9) {
-        document.querySelector(currentBox).classList.add("orange");
-    }
-    if (score >= 2 && score <= 9) {
-        document.querySelector(previousBox).classList.remove("orange");
-    }
-
+    
+    progressBar.style.width = `${40 * score}px`;
+    
     if (score === 0) {
         move.value = "New Game";
     } else {
@@ -289,12 +287,12 @@ function displayScore() {
     if (score >= 9) {
 
         let congratulations = document.createElement("p");
-        let textNode = document.createTextNode("Herzlichen Glückwunsch!");
+        let textNode = document.createTextNode("Congratulations!");
         congratulations.appendChild(textNode);
         congratulations.classList.add("congrats-medium");
         alerts.insertBefore(congratulations, alerts.childNodes[0]);
 
-        message.innerHTML = "Das war <br> <b><span>M</span>athema<span>t</span>astic</b>!";
+        message.innerHTML = "That was <br> <b><span>M</span>athema<span>t</span>astic</b>!";
 
         if (successIcon.style.display !== "inline") {
             successIcon.style.display = "inline";
@@ -527,7 +525,10 @@ window.addEventListener("beforeunload", () => {
 });
 
 window.addEventListener("resize", () => {
-    document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+    if (window.innerWidth <= 1200) {
+        console.log("setting --vh")
+        document.documentElement.style.setProperty("--vh", `${window.innerHeight}px`);
+    }
 })
 
 // Open, Close & Delete Personal Best Times

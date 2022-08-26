@@ -88,12 +88,39 @@ h1 span {
     min-width: max(30vw, 450px);
 }
 
+#progress-container {
+    display: flex;
+    margin-bottom: 2.5rem;
+    width: 360px;
+    height: 30px;
+    background-color: #dcdcdc;
+}
+
+#progress-bar {
+    width: 0;
+    height: 30px;
+    background-color: #ff8c00;
+}
+
+/* .progress-field {
+    width: 25px;
+    height: 25px;
+    background-color: #dcdcdc;
+} */
+
+/* .progress-field:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid black;
+    margin: auto;
+} */
+
 #board {
-    width: max(30vw, 450px);
-    height: max(30vw, 450px);
+    width: max(25vw, 450px);
+    height: max(25vw, 450px);
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: calc(25% - 3px) calc(25% - 3px) calc(25% - 3px) calc(25% - 3px);
+    grid-template-rows: calc(25% - 3px) calc(25% - 3px) calc(25% - 3px) calc(25% - 3px);
     gap: 4px;
     margin-top: 20px;
     box-sizing: border-box;
@@ -102,9 +129,13 @@ h1 span {
 .box {
     display:flex;
     background-color: #dcdcdc;
-    font-size: 4rem;
+    font-size: 3rem;
     justify-content: center;
     align-items: center;
+}
+
+.bi {
+    width: 30px;
 }
 
 .btn {
@@ -289,6 +320,7 @@ footer {
         width: max(30vw, 385px);
         height: max(30vw, 385px);
         margin-top: 10px;
+        display: grid;
     }
 
     #controls {
@@ -408,6 +440,10 @@ footer {
 
     .box {
         font-size: 2rem;
+    }
+
+    .bi {
+        width: 20px;
     }
 
     .btn {
