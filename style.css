@@ -115,7 +115,7 @@ h1 span {
     margin: auto;
 } */
 
-#board {
+#num-pad {
     width: max(25vw, 450px);
     height: max(25vw, 450px);
     display: grid;
@@ -132,7 +132,16 @@ h1 span {
     font-size: 3rem;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
+
+.box:not(.empty) {
+    cursor: pointer;
+}
+
+/* .box:not(.empty):hover {
+    background-color: #ff8c00;   
+} */
 
 .bi {
     width: 30px;
@@ -316,7 +325,7 @@ footer {
         min-width: max(30vw, 385px);
     }
     
-    #board {
+    #num-pad {
         width: max(30vw, 385px);
         height: max(30vw, 385px);
         margin-top: 10px;
@@ -383,7 +392,7 @@ footer {
         min-width: 0;
     }
 
-    #board {
+    #num-pad {
         width: 40vh;
         min-width: 365px;
         height: 40vh;
@@ -431,7 +440,7 @@ footer {
         display: none;
     }
 
-    #board {
+    #num-pad {
         width: 30vh;
         min-width: 255px;
         height: 30vh;

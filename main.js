@@ -13,7 +13,7 @@ const reset = document.querySelector(".reset");
 const timeOutput = document.querySelector("#stopwatch");
 const message = document.querySelector("#message")
 const finishMessage = document.querySelector("#finish-message");
-const boxes = document.querySelectorAll(".box");
+const numPad = document.querySelector("#num-pad");
 const icons = document.querySelector("#svg-icons");
 const successIcon = document.querySelector("#success-icon");
 const failIcon = document.querySelector("#fail-icon");
@@ -56,6 +56,23 @@ document.documentElement.style.setProperty("--vh", window.innerWidth <= 1200
     : "100vh"
 );
 
+// Buttons map
+
+const buttonsMap = {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "Backspace": "4",
+    "4": "5",
+    "5": "6",
+    "6": "7",
+    "Enter": "8",
+    "7": "9",
+    "8": "10",
+    "9": "11",
+    "-": "12",
+    "0": "14",
+}
 
 // Local Storage: Score
 
@@ -275,9 +292,9 @@ function displayScore() {
 
     let currentQuestion = getCurrentQuestion();
     let score = getScore();
-    
+
     progressBar.style.width = `${40 * score}px`;
-    
+
     if (score === 0) {
         move.value = "New Game";
     } else {
@@ -482,21 +499,44 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
-// Submit Result
+// Input + Submit Result
+
+numPad.addEventListener("mousedown", handleInputStart);
+numPad.addEventListener("mouseup", handleInputEnd);
+numPad.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+    handleInputStart(event);
+});
+numPad.addEventListener("touchend", handleInputEnd);
+
+send.addEventListener("click", () => {
+    handleSubmit(arithProblem, Number(input.value))
+});
 
 input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-        if (!hasBeenSubmitted) {
-            validate(arithProblem, Number(input.value));
+        handleSubmit(arithProblem, Number(input.value))
+    }
+    const box = "box" + buttonsMap[event.key];
+    const button = document.querySelector(`.${box}`);
+    button.classList.add("orange");
+});
+
+input.addEventListener("keyup", (event) => {
+    const box = "box" + buttonsMap[event.key];
+    const button = document.querySelector(`.${box}`);
+    button.classList.remove("orange");
+});
+
+window.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        const box = "box" + buttonsMap[event.key];
+        const button = document.querySelector(`.${box}`);
+        if (button.classList.contains("orange")) {
+            button.classList.remove("orange");
         }
     }
 });
-
-send.addEventListener("click", () => {
-    if (!hasBeenSubmitted) {
-        validate(arithProblem, Number(input.value));
-    }
-})
 
 // Reset
 
@@ -550,3 +590,49 @@ clear.addEventListener("click", () => {
     clearBestTimes();
     displayRanking();
 });
+
+// Helpers
+
+function handleSubmit(arithmeticProblem, result) {
+    if (!hasBeenSubmitted) {
+        validate(arithmeticProblem, result);
+    }
+}
+
+function getTarget(event) {
+    return event.composedPath().find((element) => element.classList.contains("box"));
+}
+
+function handleInputStart(event) {
+    if (hasBeenGenerated) {
+        let boxNumber;
+        const clickedButton = getTarget(event);
+        clickedButton.classList.forEach((htmlClass) => {
+            if (htmlClass.match(/box\d{1,2}/)) {
+                boxNumber = htmlClass.replace("box", "");
+            }
+        });
+
+        clickedButton.classList.toggle("orange");
+
+        switch (boxNumber) {
+            case "4":
+                if (input.value) {
+                    input.value = input.value.slice(0, -1);
+                }
+                break;
+            case "8":
+                handleSubmit(arithProblem, Number(input.value));
+                break;
+            default:
+                const key = Object.keys(buttonsMap).find((key) => buttonsMap[key] === boxNumber);
+                input.value += key;
+        }
+    }
+}
+
+function handleInputEnd(event) {
+    const clickedButton = getTarget(event);
+    console.log(clickedButton.classList);
+    clickedButton.classList.toggle("orange");
+}
