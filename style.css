@@ -1,5 +1,5 @@
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     color: #353248;
     box-sizing: border-box;
@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    display:flex;
+    display: flex;
     justify-content: center;
     background-color: #dcdcdc;
     padding: 1.8em;
@@ -74,7 +74,7 @@ h1 span {
 }
 
 #svg-icons {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -127,9 +127,9 @@ h1 span {
 }
 
 .box {
-    display:flex;
+    display: flex;
     background-color: #dcdcdc;
-    font-size: 3rem;
+    font-size: 2.5rem;
     justify-content: center;
     align-items: center;
     user-select: none;
@@ -157,9 +157,11 @@ h1 span {
     -webkit-appearance: none;
 }
 
-.btn:hover, .send:hover, #clear-best-times:hover {
+.btn:hover,
+.send:hover,
+#clear-best-times:hover {
     background-color: #ff8c00;
-    color:#000000;
+    color: #000000;
     cursor: pointer;
 }
 
@@ -248,8 +250,15 @@ footer {
 }
 
 @keyframes animatetop {
-    from {top:-300px; opacity: 0;}
-    to {top:0; opacity: 1;}
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
 }
 
 .close-modal {
@@ -264,7 +273,8 @@ footer {
     cursor: pointer;
 }
 
-.modal-header, .modal-footer {
+.modal-header,
+.modal-footer {
     padding: 10px 15px;
     background-color: #750EBE;
     color: #fefefe;
@@ -310,26 +320,39 @@ footer {
 
     #displayQuestion {
         min-width: 0;
+        font-size: 1.6rem;
+    }
+
+    #inputResult {
+        font-size: 1.6rem;
+        width: 55px;
     }
 
     #displayAlert {
         min-width: 0;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     #message span {
-        font-size: 1.9rem;
+        font-size: 1.6rem;
     }
 
     #container {
         min-width: max(30vw, 385px);
     }
-    
+
     #num-pad {
-        width: max(30vw, 385px);
-        height: max(30vw, 385px);
+        width: max(20vw, 325px);
+        height: max(20vw, 325px);
         margin-top: 10px;
-        display: grid;
+    }
+
+    .box {
+        font-size: 2rem;
+    }
+
+    .bi {
+        width: 23px;
     }
 
     #controls {
@@ -340,8 +363,19 @@ footer {
         margin: 10px 10px 0;
     }
 
-    #success-icon, #fail-icon {
-        width: 80px;
+    .check, .cross {
+        width: 65px;
+        height: 65px;
+    }
+
+    #progress-container {
+        margin-bottom: 1.5rem;
+        width: 270px;
+        height: 25px;
+    }
+
+    #progress-bar {
+        height: 25px;
     }
 }
 
@@ -349,9 +383,8 @@ footer {
 @media screen and (max-width: 1080px) and (orientation: portrait) {
     #super-container {
         flex-direction: column;
-        min-height: 565px; /* prevents page-container fit small screen */
     }
-    
+
     #displayQuestion {
         width: 95%;
         margin: auto;
@@ -365,12 +398,13 @@ footer {
         align-items: center;
         width: 95%;
         margin: auto;
-        min-height: 100px;
+        min-height: 103px;
     }
 
     #displayAlert p {
         margin-left: 0px;
         margin-right: 0px;
+        line-height: 1.1;
     }
 
     .congrats-medium {
@@ -392,17 +426,13 @@ footer {
         min-width: 0;
     }
 
-    #num-pad {
+    /* #num-pad {
         width: 40vh;
         min-width: 365px;
         height: 40vh;
         min-height: 365px;
         margin-top: 0;
-    }
-
-    .box {
-        font-size: 3.5rem;
-    }
+    } */
 
     .bt-modal-content {
         min-width: 80%;
@@ -419,7 +449,7 @@ footer {
         margin: .2em .4em;
         font-size: 2rem;
     }
-    
+
     header h1 span {
         font-size: 2.3rem;
     }
@@ -431,8 +461,13 @@ footer {
     #form {
         margin: 10px 0;
     }
-    
+
+    #displayQuestion {
+        min-height: 62px;
+    }
+
     #displayAlert {
+        min-height: 62px;
         justify-content: space-evenly;
     }
 
@@ -442,9 +477,9 @@ footer {
 
     #num-pad {
         width: 30vh;
-        min-width: 255px;
+        min-width: 265px;
         height: 30vh;
-        min-height: 255px;
+        min-height: 235px;
     }
 
     .box {
@@ -457,5 +492,21 @@ footer {
 
     .btn {
         width: 115px;
+        padding: 9px 10px;
+    }
+
+    .check, .cross {
+        width: 55px;
+        height: 55px;
+    }
+
+    #progress-container {
+        margin-bottom: .5rem;
+        width: 225px;
+        height: 20px;
+    }
+
+    #progress-bar {
+        height: 20px;
     }
 }

@@ -17,6 +17,7 @@ const numPad = document.querySelector("#num-pad");
 const icons = document.querySelector("#svg-icons");
 const successIcon = document.querySelector("#success-icon");
 const failIcon = document.querySelector("#fail-icon");
+const progressContainer = document.querySelector("#progress-container");
 const progressBar = document.querySelector("#progress-bar");
 
 // Modal Elements
@@ -293,7 +294,12 @@ function displayScore() {
     let currentQuestion = getCurrentQuestion();
     let score = getScore();
 
-    progressBar.style.width = `${40 * score}px`;
+    const progressContainerLength = getComputedStyle(progressContainer)
+        .width
+        .replace("px", "");
+    const multiplier = progressContainerLength / 9;
+
+    progressBar.style.width = `${score * multiplier}px`;
 
     if (score === 0) {
         move.value = "New Game";
