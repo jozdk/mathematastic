@@ -613,7 +613,7 @@ function handleInputStart(event) {
             }
         });
 
-        clickedButton.classList.toggle("orange");
+        clickedButton.classList.add("orange");
 
         switch (boxNumber) {
             case "4":
@@ -633,6 +633,5 @@ function handleInputStart(event) {
 
 function handleInputEnd(event) {
     const clickedButton = getTarget(event);
-    console.log(clickedButton.classList);
-    clickedButton.classList.toggle("orange");
+    clickedButton.classList.remove("orange");
 }
