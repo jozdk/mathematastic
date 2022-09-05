@@ -613,20 +613,22 @@ function handleInputStart(event) {
             }
         });
 
-        clickedButton.classList.add("orange");
-
-        switch (boxNumber) {
-            case "4":
-                if (input.value) {
-                    input.value = input.value.slice(0, -1);
-                }
-                break;
-            case "8":
-                handleSubmit(arithProblem, Number(input.value));
-                break;
-            default:
-                const key = Object.keys(buttonsMap).find((key) => buttonsMap[key] === boxNumber);
-                input.value += key;
+        if (!clickedButton.classList.contains("empty")) {
+            clickedButton.classList.add("orange");
+    
+            switch (boxNumber) {
+                case "4":
+                    if (input.value) {
+                        input.value = input.value.slice(0, -1);
+                    }
+                    break;
+                case "8":
+                    handleSubmit(arithProblem, Number(input.value));
+                    break;
+                default:
+                    const key = Object.keys(buttonsMap).find((key) => buttonsMap[key] === boxNumber);
+                    input.value += key;
+            }
         }
     }
 }
