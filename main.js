@@ -6,7 +6,6 @@ const display = document.querySelector("#displayQuestion");
 const alerts = document.querySelector("#displayAlert");
 const form = document.querySelector("#form");
 const input = document.querySelector("#inputResult");
-const send = document.querySelector(".send");
 const span = document.querySelector("#span");
 const move = document.querySelector(".move");
 const reset = document.querySelector(".reset");
@@ -228,7 +227,6 @@ function validate(arithProblem, inputResult) {
 function formHidden(value) {
     form.hidden = value;
     input.hidden = value;
-    send.hidden = value;
 }
 
 function removeQuestion() {
@@ -514,10 +512,6 @@ numPad.addEventListener("touchstart", (event) => {
     handleInputStart(event);
 });
 numPad.addEventListener("touchend", handleInputEnd);
-
-send.addEventListener("click", () => {
-    handleSubmit(arithProblem, Number(input.value))
-});
 
 input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
