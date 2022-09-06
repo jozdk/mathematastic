@@ -1,6 +1,6 @@
 # Mathematastic
 
-A math quiz to practice your mental math skills. Randomly sets arithmetical problems, has a built-in timer, saves and ranks your personal bests.
+A math quiz to practice your mental math skills. Randomly sets arithmetical problems, measures the time, saves and ranks your personal bests. Has a built in numeric keypad for input on mobile screens.
 
 Visit [https://mathematastic.de](https://mathematastic.de) and start playing :wink:
 
@@ -14,9 +14,19 @@ To run Mathematastic locally, just clone or download the repository and open `in
 
 ## Gameplay
 
-Just click on `New Game` to start a new game, type in your answer to the displayed arithmetical problem and click `Submit` (or hit `Enter`) to see the result. Once you reach the ninth square, the game finishes. Click on the podium icon in the bottom right corner of the screen to check out your best times. Clicking `Reset` does just what is says and resets the game (alternatively, you can press `R` on your keyboard - see below for keyboard shortcuts!)
+- Click/tap on `New Game` to start a new game
+- To input your result for an arithmetical problem:
+    - Use the built-in numeric keypad
+    - Or type it in (if you are on a desktop)
+- Submit your result by clicking/tapping on the :arrow_right: key on the built-in keypad or press `Enter`
+    - The timer pauses when you submit a correct result and restarts with the next one
+- Click/tap `Next` or hit `Enter` to display the next arithmetical problem
+- Once the progress bar is full (after 9 arithmetical problems), the game finishes
+- Click on the podium icon in the bottom right corner of the screen to check out your personal best times
+- Clicking/tapping `Reset` does just what it says and resets the game
+    - Alternatively, you cann press `R` on your keyboard to reset - see below for keyboard shortcuts!
 
-:exclamation: **Note: If you are playing on a smartphone, be sure to scroll down in order to make the address bar of the Browser disappear so you can see the timer and the rankings button!**
+:exclamation: **Note: For Mathematastic to run properly, you need to have Local Storage enabled in your Browser!**
 
 ## Keyboard shortcuts
 
