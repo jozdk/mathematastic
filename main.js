@@ -56,7 +56,7 @@ document.documentElement.style.setProperty("--vh", window.innerWidth <= 1200
     : "100vh"
 );
 
-// Buttons map
+// Button maps
 
 const buttonsMap = {
     "1": "1",
@@ -72,6 +72,22 @@ const buttonsMap = {
     "9": "11",
     "-": "12",
     "0": "14",
+}
+
+const buttonsMapReversed = {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "Backspace",
+    "5": "4",
+    "6": "5",
+    "7": "6",
+    "8": "Enter",
+    "9": "7",
+    "10": "8",
+    "11": "9",
+    "12": "-",
+    "14": "0"
 }
 
 // Local Storage: Score
@@ -626,8 +642,7 @@ function handleInputStart(event) {
                     handleSubmit(arithProblem, Number(input.value));
                     break;
                 default:
-                    const key = Object.keys(buttonsMap).find((key) => buttonsMap[key] === boxNumber);
-                    input.value += key;
+                    input.value += buttonsMapReversed[boxNumber];
             }
         }
     }
