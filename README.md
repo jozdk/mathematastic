@@ -1,12 +1,12 @@
 # Mathematastic
 
-A math quiz to practice your mental math skills. Randomly sets arithmetical problems, measures the time, saves and ranks your personal bests. Has a built in numeric keypad for input on mobile screens.
+A math quiz to practice your mental math skills. Randomly sets arithmetical problems, measures the time, saves and ranks your personal bests. Has a built-in numeric keypad for input on mobile screens.
 
-Visit [https://mathematastic.de](https://mathematastic.de) and start playing :wink:
+Visit [https://mathematastic.de](https://mathematastic.de) and start playing :wink: (requires the Browser's Local Storage to be enabled)
 
 ## Requirements
 
-Web Browser
+Web Browser with Web Storage API (supported by all modern Browsers)
 
 ## Running the App
 

@@ -129,7 +129,7 @@ h1 span {
 .box {
     display: flex;
     background-color: #dcdcdc;
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     justify-content: center;
     align-items: center;
     user-select: none;
@@ -139,12 +139,8 @@ h1 span {
     cursor: pointer;
 }
 
-/* .box:not(.empty):hover {
-    background-color: #ff8c00;   
-} */
-
 .bi {
-    width: 30px;
+    width: 28px;
 }
 
 .btn {
@@ -158,7 +154,6 @@ h1 span {
 }
 
 .btn:hover,
-.send:hover,
 #clear-best-times:hover {
     background-color: #ff8c00;
     color: #000000;
@@ -177,16 +172,13 @@ h1 span {
     width: 70px;
 }
 
-.send {
-    background-color: #750EBE;
-    color: white;
-    border: none;
-    padding: 10px;
-}
-
 .orange {
     background-color: #F58700;
     background-color: #ff8c00;
+}
+
+.darkgrey {
+    background-color: #A3A3A3;
 }
 
 .check {

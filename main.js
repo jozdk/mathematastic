@@ -530,11 +530,15 @@ numPad.addEventListener("touchstart", (event) => {
 numPad.addEventListener("touchend", handleInputEnd);
 
 input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        handleSubmit(arithProblem, Number(input.value))
-    }
     const box = "box" + buttonsMap[event.key];
     const button = document.querySelector(`.${box}`);
+
+    if (event.key === "Enter") {
+        handleSubmit(arithProblem, Number(input.value));
+        button.classList.add("darkgrey");
+        return;
+    }
+    
     button.classList.add("orange");
 });
 
@@ -548,9 +552,7 @@ window.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
         const box = "box" + buttonsMap[event.key];
         const button = document.querySelector(`.${box}`);
-        if (button.classList.contains("orange")) {
-            button.classList.remove("orange");
-        }
+        button.classList.remove("darkgrey");
     }
 });
 
@@ -630,7 +632,7 @@ function handleInputStart(event) {
         });
 
         if (!clickedButton.classList.contains("empty")) {
-            clickedButton.classList.add("orange");
+            boxNumber === "8" ? clickedButton.classList.add("darkgrey") : clickedButton.classList.add("orange");
     
             switch (boxNumber) {
                 case "4":
@@ -650,5 +652,5 @@ function handleInputStart(event) {
 
 function handleInputEnd(event) {
     const clickedButton = getTarget(event);
-    clickedButton.classList.remove("orange");
+    clickedButton.classList.remove("orange", "darkgrey");
 }
