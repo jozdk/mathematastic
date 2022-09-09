@@ -607,11 +607,9 @@ openRanking.addEventListener("click", () => {
 
 closeRanking.addEventListener("click", () => modalRanking.style.display = "none");
 
-window.addEventListener("click", (event) => {
-    if (event.target === modalRanking) {
-        modalRanking.style.display = "none";
-    }
-});
+modalRanking.addEventListener("click", closeBestTimesModal);
+
+modalRanking.addEventListener("touchstart", closeBestTimesModal);
 
 clear.addEventListener("click", () => {
     clearBestTimes();
@@ -668,6 +666,12 @@ function handleInputStart(event) {
 function handleInputEnd(event) {
     const clickedButton = getTarget(event);
     clickedButton.classList.remove("orange", "darkgrey");
+}
+
+function closeBestTimesModal(event) {
+    if (event.target === modalRanking) {
+        modalRanking.style.display = "none";
+    }
 }
 
 function isLocalStorageAvailable() {
