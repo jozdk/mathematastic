@@ -16,7 +16,7 @@ header {
     display: flex;
     justify-content: center;
     background-color: #dcdcdc;
-    padding: 1.8em;
+    padding: 1.25rem;
 }
 
 h1 {
@@ -33,6 +33,10 @@ h1 span {
 #message span {
     color: #ff8c00;
     font-size: 2.3rem;
+}
+
+header img {
+    align-self: center;
 }
 
 #super-container {
@@ -102,19 +106,6 @@ h1 span {
     background-color: #ff8c00;
 }
 
-/* .progress-field {
-    width: 25px;
-    height: 25px;
-    background-color: #dcdcdc;
-} */
-
-/* .progress-field:after {
-    content: "";
-    flex: 1 1;
-    border-bottom: 1px solid black;
-    margin: auto;
-} */
-
 #num-pad {
     width: max(25vw, 450px);
     height: max(25vw, 450px);
@@ -182,7 +173,7 @@ h1 span {
 }
 
 .new-bt-entry {
-    border: 1.5px solid #ff8c00;
+    border: 2.5px solid #ff8c00;
 }
 
 .check {
@@ -248,7 +239,7 @@ footer {
 
 .alert-modal-content {
     margin-top: 20%;
-    width: max(30%, 300px);
+    width: 30%;
 }
 
 @keyframes animatetop {
@@ -383,6 +374,10 @@ footer {
     #progress-bar {
         height: 25px;
     }
+
+    .alert-modal-content {
+        width: 50%;
+    }
 }
 
 
@@ -440,7 +435,7 @@ footer {
         margin-top: 0;
     } */
 
-    .bt-modal-content {
+    .modal-content, .alert-modal-content {
         min-width: 80%;
     }
 }

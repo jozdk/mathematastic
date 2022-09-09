@@ -10,7 +10,7 @@ Web Browser with Web Storage API (supported by all modern Browsers)
 
 ## Running the App
 
-To run Mathematastic locally, just clone or download the repository and open `index.html`.
+To run Mathematastic locally, clone or download the repository and open `index.html`.
 
 ## Gameplay
 
@@ -32,7 +32,7 @@ To run Mathematastic locally, just clone or download the repository and open `in
 
 `Enter`   
 
-New Game / Move / Submit   
+New Game / Next / Submit   
 
 `R`   
 
