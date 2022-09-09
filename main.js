@@ -478,12 +478,12 @@ function displayRanking() {
 
     if (bestTimes) {
         ranking.firstElementChild.innerHTML = "";
-        let time;
         let output = "";
 
-        bestTimes.forEach(i => {
-            time = convertMilliseconds(i);
-            output += `<li> ${time[0]}:${time[1]}:${time[2]} </li>`;
+        bestTimes.forEach(bestTime => {
+            const time = convertMilliseconds(bestTime);
+            const newEntry = bestTime === savedTime;
+            output += `<li ${newEntry ? 'class="new-bt-entry"' : ''}> ${time[0]}:${time[1]}:${time[2]} </li>`;
         });
 
         olRanking.innerHTML = output;

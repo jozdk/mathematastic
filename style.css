@@ -181,6 +181,10 @@ h1 span {
     background-color: #A3A3A3;
 }
 
+.new-bt-entry {
+    border: 1.5px solid #ff8c00;
+}
+
 .check {
     color: #ff8c00;
     width: 100px;
