@@ -28,6 +28,9 @@ const olRanking = document.querySelector("#best-times");
 const ranking = document.querySelector("#bt-modal-body");
 const clear = document.querySelector("#clear-best-times");
 
+const modalAlert = document.querySelector("#alert-modal");
+const reloadPage = document.querySelector("#try-again");
+
 // Global Variables
 
 const success = ["Correct!", "Good Job!", "Awesome!", "Keep it up!", "Genius!"];
@@ -88,6 +91,12 @@ const buttonsMapReversed = {
     "11": "9",
     "12": "-",
     "14": "0"
+}
+
+// Test Local Storage availability
+
+if (!isLocalStorageAvailable()) {
+    modalAlert.style.display = "block";
 }
 
 // Local Storage: Score
@@ -609,6 +618,12 @@ clear.addEventListener("click", () => {
     displayRanking();
 });
 
+// Reload Page
+
+reloadPage.addEventListener("click", (event) => {
+    location.reload();
+})
+
 // Helpers
 
 function handleSubmit(arithmeticProblem, result) {
@@ -653,4 +668,15 @@ function handleInputStart(event) {
 function handleInputEnd(event) {
     const clickedButton = getTarget(event);
     clickedButton.classList.remove("orange", "darkgrey");
+}
+
+function isLocalStorageAvailable() {
+    const test = "test";
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch (err) {
+        return false;
+    }
 }

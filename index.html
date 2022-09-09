@@ -117,11 +117,11 @@
 
     </div>
 
-    <!-- Modal -->
+    <!-- Best Times Modal -->
 
     <div id="bt-modal" class="modal">
 
-        <div class="bt-modal-content">
+        <div class="modal-content">
             <div class="modal-header">
                 <span id="close-best-times" class="close-modal">&times;</span>
                 <h2>Personal Best Times</h2>
@@ -131,7 +131,32 @@
                 <ol id="best-times"></ol>
             </div>
             <div class="modal-footer">
-                <button id="clear-best-times">Delete Best Times</button>
+                <button id="clear-best-times" class="modal-btn">Delete Best Times</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Alert Modal -->
+
+    <div id="alert-modal" class="modal">
+
+        <div class="modal-content alert-modal-content">
+            <div class="modal-header">
+                <!-- <span id="close-alert" class="close-modal">&times;</span> -->
+                <h2>Sorry, there has been an error</h2>
+            </div>
+            <div id="alert-modal-body" class="modal-body">
+                <p>Please enable Local Storage in your Browser for Mathematastic to run properly.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="try-again" class="modal-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-arrow-repeat align-middle" viewBox="0 0 16 16">
+                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                    </svg>
+                    <span class="align-middle">Try again</span>
+                </button>
             </div>
         </div>
 
